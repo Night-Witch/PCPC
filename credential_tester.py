@@ -1,5 +1,4 @@
-# PPC
-credential_tester.py
+# PPC 
 
 
 import itertools
