@@ -1,3 +1,5 @@
+Python & C# Password Cracker (PCPC)
+
 Script Brute Force Password Cracker (Pyhon or c#)
 
 Overview: This scripts is designed to perform a brute force attack on a web server's login page by iterating through all possible combinations of passwords. The script uses a combination of uppercase letters, lowercase letters, digits, and special characters to generate potential passwords and attempts to log in with each one. This code uses the requests library to send POST requests to the server. If the server returns a response with the text 'Success' (or another indicator of success), the program outputs the successful password and terminates.
