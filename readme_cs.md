@@ -36,28 +36,37 @@ For example:
 
   
 **Instructions for Using the C# Brute Force Script on Kali Linux via Terminal**
+
 Follow these steps to set up, compile, and run the C# brute force script on Kali Linux through the terminal.
+
 **1. Install .NET SDK on Kali Linux**
   Before running the C# script, you need to install the .NET SDK. Here’s how you can do it:
-    **1.1 Update your package lists and install the required dependencies:**
+   
+  **1.1 Update your package lists and install the required dependencies:**
     `sudo apt update`
     `sudo apt install -y apt-transport-https software-properties-common`
-    **1.2. Add Microsoft’s package signing key and repository:**
+   
+   **1.2. Add Microsoft’s package signing key and repository:**
     `wget https://packages.microsoft.com/config/debian/10/packages-microsoft-prod.deb -O packages-microsoft-prod.deb`
     `sudo dpkg -i packages-microsoft-prod.deb`
-    **1.3. Install the .NET SDK:**
+   
+   **1.3. Install the .NET SDK:**
     `sudo apt update`
     `sudo apt install -y dotnet-sdk-7.0`
-    **1.4. Verify the installation:**
+  
+  **1.4. Verify the installation:**
     `dotnet --version`
     If installed correctly, it will display the version number (e.g., 7.0.100).
 
 **2. Set Up the Project**
+  
    **2.1. Create a new directory for the project:**
    `mkdir BruteForcePassword`
    `cd BruteForcePassword`
+  
    **2.2. Create a new C# console application project:**
    `dotnet new console`
+   
    This command generates the basic structure for a console project with a Program.cs file.
 
    **3. Add the Script**
