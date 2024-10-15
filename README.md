@@ -17,3 +17,7 @@ Set Password Length: Adjust the password length parameter to control the complex
 Run the Script: Execute the script in a Python environment, and it will attempt to find the correct password by brute force. (This code will iterate through all possible combinations of passwords of length 4 for the specified username. You can change the length by modifying the last parameter in the call to brute_force_password.)
 
 !!! Disclaimer: This script is intended for educational purposes only. Ensure that you have explicit permission to test the target server's security. Unauthorized access to computer systems is illegal and unethical. !!!
+
+For using c# script - open readme.cs 
+For using python - open readme.py
+The instruction inside.
