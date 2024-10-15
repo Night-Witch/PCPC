@@ -1,4 +1,4 @@
-__How the Code Works:__
+<p style="font-size:20px">__How the Code Works:__</p>
 
 **Arguments:**
 
