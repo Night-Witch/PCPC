@@ -88,8 +88,11 @@ Follow these steps to set up, compile, and run the C# brute force script on Kali
    This command generates the basic structure for a console project with a Program.cs file.
 
    **3. Add the Script**
+   
    **3.1. Open the Program.cs file in a text editor:**
+   
    `nano Program.cs`
+   
    **3.2. Replace the content of Program.cs with the script code (provided above):**
 ```
 using System;
