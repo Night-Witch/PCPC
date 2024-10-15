@@ -1,4 +1,4 @@
-####**How the Code Works:**
+####__How the Code Works:__
 ##**Arguments:**
 
 - url: The URL to which the HTTP POST requests are sent.
@@ -168,8 +168,37 @@ The script uses `Newtonsoft.Json` for converting data to JSON format. You need t
 
    **4.1. Install the Newtonsoft.Json package:**
    `dotnet add package Newtonsoft.Json`
-
    
+##**5. Compile and Run the Script**
+   **5.1. Compile and run the project with your command-line arguments:**
+   `dotnet run <url> <username> <passwordLength>`
+   
+   - `<url>`: The URL to which the POST requests will be sent.
+   - `<username>`: The username for which you are attempting to brute-force the password.
+   - `<passwordLength>`: The length of the password being brute-forced.
+
+**Example:**
+`dotnet run https://example.com/login myuser 4`
+
+In this example:
+
+   - The program will brute-force the password for the user myuser at https://example.com/login.
+   - It will try passwords that are 4 characters long.
+
+##**6. Troubleshooting**
+
+   - Ensure the server URL is correct and accessible.
+   - The script expects the server to return a response containing the word "Success" upon a successful login. You may need to adjust this part of the code based on the actual response from the server you're testing against.
+
+
+####**Summary of Steps:**
+
+1. Install .NET SDK: Set up the environment on Kali Linux.
+2. Create a Project: Use dotnet new console to create a C# project.
+3. Add the Script: Replace the default content in Program.cs with the provided script.
+4. Install Dependencies: Install the Newtonsoft.Json package for JSON handling.
+5. Run the Script: Use dotnet run with the URL, username, and password length as arguments.
+6. Now your C# script will execute, sending HTTP POST requests and brute-forcing the password based on the command-line inputs.
 
 
 
