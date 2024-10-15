@@ -1,11 +1,12 @@
-####__How the Code Works:__####
-##**Arguments:**
+__How the Code Works:__
+
+**Arguments:**
 
 - url: The URL to which the HTTP POST requests are sent.
 - username: The username for which you're trying to brute-force the password.
 - passwordLength: The length of the password that will be brute-forced.
 
-  ##**Process:**
+**Process:**
 
 1. The program accepts the url, username, and passwordLength as arguments from the command line.
 2. It then brute-forces passwords by generating all possible combinations of characters (uppercase, lowercase, and digits).
@@ -13,8 +14,8 @@
 4. If the server responds with "Success", the correct password is displayed, and the process stops.
 
 
-####**How to Run the Program in Kali Linux:**
-##**Compile and Run:**
+**How to Run the Program in Kali Linux:**
+**Compile and Run:**
 After creating the C# project and adding the code as described earlier, you can run the program using the following command:.
 
 `dotnet run <url> <username> <passwordLength>`
@@ -23,20 +24,20 @@ For example:
 
 `dotnet run https://example.com/login myuser 4`
 
-##**Explanation of Command:**
+**Explanation of Command:**
 - https://example.com/login: This is the URL where the POST requests will be sent.
 - myuser: This is the username for which the password is being brute-forced.
 - 4: This is the length of the password being tested.
 
-####**Notes:**
+**Notes:**
 - This program uses a simple character set of lowercase and uppercase letters, and digits (a-z, A-Z, 0-9).
 - You can modify the character set in the charset variable if you want to include additional characters (e.g., special symbols).
 - The program expects the server to respond with a string that contains "Success" upon a successful login attempt. You may need to modify this logic depending on the actual server's response format.
 
   
-#####**Instructions for Using the C# Brute Force Script on Kali Linux via Terminal**
+**Instructions for Using the C# Brute Force Script on Kali Linux via Terminal**
 Follow these steps to set up, compile, and run the C# brute force script on Kali Linux through the terminal.
-##**1. Install .NET SDK on Kali Linux**
+**1. Install .NET SDK on Kali Linux**
   Before running the C# script, you need to install the .NET SDK. Here’s how you can do it:
     **1.1 Update your package lists and install the required dependencies:**
     `sudo apt update`
@@ -51,7 +52,7 @@ Follow these steps to set up, compile, and run the C# brute force script on Kali
     `dotnet --version`
     If installed correctly, it will display the version number (e.g., 7.0.100).
 
-##**2. Set Up the Project**
+**2. Set Up the Project**
    **2.1. Create a new directory for the project:**
    `mkdir BruteForcePassword`
    `cd BruteForcePassword`
@@ -59,7 +60,7 @@ Follow these steps to set up, compile, and run the C# brute force script on Kali
    `dotnet new console`
    This command generates the basic structure for a console project with a Program.cs file.
 
-   ##**3. Add the Script**
+   **3. Add the Script**
    **3.1. Open the Program.cs file in a text editor:**
    `nano Program.cs`
    **3.2. Replace the content of Program.cs with the script code (provided above):**
@@ -163,13 +164,13 @@ class Program
    - Press CTRL + O, then Enter to save.
    - Press CTRL + X to exit nano.
 
-##**4. Install Newtonsoft.Json (for JSON serialization)**
+**4. Install Newtonsoft.Json (for JSON serialization)**
 The script uses `Newtonsoft.Json` for converting data to JSON format. You need to install this package in your project:
 
    **4.1. Install the Newtonsoft.Json package:**
    `dotnet add package Newtonsoft.Json`
    
-##**5. Compile and Run the Script**
+**5. Compile and Run the Script**
    **5.1. Compile and run the project with your command-line arguments:**
    `dotnet run <url> <username> <passwordLength>`
    
@@ -185,13 +186,13 @@ In this example:
    - The program will brute-force the password for the user myuser at https://example.com/login.
    - It will try passwords that are 4 characters long.
 
-##**6. Troubleshooting**
+**6. Troubleshooting**
 
    - Ensure the server URL is correct and accessible.
    - The script expects the server to return a response containing the word "Success" upon a successful login. You may need to adjust this part of the code based on the actual response from the server you're testing against.
 
 
-####**Summary of Steps:**
+**Summary of Steps:**
 
 1. Install .NET SDK: Set up the environment on Kali Linux.
 2. Create a Project: Use dotnet new console to create a C# project.
