@@ -43,16 +43,22 @@ Follow these steps to set up, compile, and run the C# brute force script on Kali
   Before running the C# script, you need to install the .NET SDK. Here’s how you can do it:
    
   **1.1 Update your package lists and install the required dependencies:**
-    `sudo apt update`
-    `sudo apt install -y apt-transport-https software-properties-common`
+    ```
+    sudo apt update
+    sudo apt install -y apt-transport-https software-properties-common
+    ```
    
    **1.2. Add Microsoft’s package signing key and repository:**
-    `wget https://packages.microsoft.com/config/debian/10/packages-microsoft-prod.deb -O packages-microsoft-prod.deb`
-    `sudo dpkg -i packages-microsoft-prod.deb`
+    ```
+    wget https://packages.microsoft.com/config/debian/10/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+    sudo dpkg -i packages-microsoft-prod.deb
+    ```
    
    **1.3. Install the .NET SDK:**
-    `sudo apt update`
-    `sudo apt install -y dotnet-sdk-7.0`
+    ```
+    sudo apt update
+    sudo apt install -y dotnet-sdk-7.0
+    ```
   
   **1.4. Verify the installation:**
     `dotnet --version`
