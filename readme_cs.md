@@ -55,12 +55,16 @@ Follow these steps to set up, compile, and run the C# brute force script on Kali
    **1.2. Add Microsoft’s package signing key and repository:**
     ```
     wget https://packages.microsoft.com/config/debian/10/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+    ```
+    ```
     sudo dpkg -i packages-microsoft-prod.deb
     ```
    
    **1.3. Install the .NET SDK:**
     ```
     sudo apt update
+    ```
+    ```
     sudo apt install -y dotnet-sdk-7.0
     ```
   
@@ -71,8 +75,12 @@ Follow these steps to set up, compile, and run the C# brute force script on Kali
 **2. Set Up the Project**
   
    **2.1. Create a new directory for the project:**
-   `mkdir BruteForcePassword`
-   `cd BruteForcePassword`
+   ```
+   mkdir BruteForcePassword
+   ```
+   ```
+   cd BruteForcePassword
+   ```
   
    **2.2. Create a new C# console application project:**
    `dotnet new console`
