@@ -1,6 +1,6 @@
-<p style="font-size:20px">__How the Code Works:__</p>
+__<p style="font-size:40px">How the Code Works:</p>__
 
-**Arguments:**
+__<p style="font-size:20px">Arguments:</p>__
 
 - url: The URL to which the HTTP POST requests are sent.
 - username: The username for which you're trying to brute-force the password.
