@@ -1,4 +1,4 @@
-####__How the Code Works:__
+####__How the Code Works:__####
 ##**Arguments:**
 
 - url: The URL to which the HTTP POST requests are sent.
