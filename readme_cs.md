@@ -47,6 +47,8 @@ Follow these steps to set up, compile, and run the C# brute force script on Kali
   **1.1 Update your package lists and install the required dependencies:**
     ```
     sudo apt update
+    ```
+    ```
     sudo apt install -y apt-transport-https software-properties-common
     ```
    
