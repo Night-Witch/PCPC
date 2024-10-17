@@ -1,26 +1,55 @@
-Python Script Brute Force Password Cracker 
+# How to Install and Use the Script on Kali Linux
 
-Overview: This Python script is designed to perform a brute force attack on a web server's login page by iterating through all possible combinations of passwords. The script uses a combination of uppercase letters, lowercase letters, digits, and special characters to generate potential passwords and attempts to log in with each one.
-This code uses the requests library to send POST requests to the server. If the server returns a response with the text 'Success' (or another indicator of success), the program outputs the successful password and terminates.
+### 1. Ensure Python 3 is Installed
+Make sure Python 3 is installed on your Kali Linux machine. You can check the version by running:
 
-Functionality:
+```
+bash
+python3 --version
+```
+If Python 3 is not installed, install it with the following commands:
 
-Password Generation: The script generates all possible combinations of characters (including uppercase letters, lowercase letters, digits, and special symbols) for a specified length.
-HTTP Requests: For each generated password, the script sends a POST request to the designated login URL with the username and password as parameters.
-Response Handling: It checks the server's response to determine whether the login attempt was successful. If a response contains the keyword "Success", the script will output the found password and terminate.
-Usage:
+### 2. Install Required Python Libraries
 
-Set the URL: Modify the url variable to point to the login page of the target server.
-(Change url = "http://example.com/login" to the actual server address you want to test.)
+You will need the `requests` library to run this script. Install it using `pip`:
 
-Specify the Username: Change the username in the function call to match the account you are attempting to crack.
-(Replace "myusername" in the call to brute_force_password with the actual username for which you are trying to guess the password.)
+```
+sudo apt install python3-pip
+pip3 install requests
+```
 
-Set Password Length: Adjust the password length parameter to control the complexity of the brute force attack.
-This code will iterate through all possible combinations of passwords of length 4 for the specified username. You can change the length by modifying the last parameter in the call to brute_force_password.
+### 3. Download or Clone the Script
 
-Run the Script: Execute the script in a Python environment, and it will attempt to find the correct password by brute force.
-(This code will iterate through all possible combinations of passwords of length 4 for the specified username. You can change the length by modifying the last parameter in the call to brute_force_password.)
+Download or clone the script from your GitHub repository (or copy and paste the code above into a `.py file):
+
+```
+git clone https://github.com/Night-Witch/PCPC.git
+cd PCPC
+```
+
+### 4. Run the Script
+You can now run the script from the terminal by specifying the URL, username, and desired password length as arguments.
+
+Usage example:
+
+```
+python3 credential_tester.py https://example.com/login myusername 6
+```
+
+This will attempt to brute-force a password of 6 characters for the specified username against the given URL.
 
 
-!!! Disclaimer: This script is intended for educational purposes only. Ensure that you have explicit permission to test the target server's security. Unauthorized access to computer systems is illegal and unethical. !!!
+### Explanation of Arguments:
+
+- `<url>` : The URL of the server where you want to send the login attempts.
+- `<username>` : The username for which the password will be brute-forced.
+- `<passwordLength>` : The length of the password you want to brute-force.
+
+
+## Example:
+
+```
+python3 credential_tester.py https://example.com/login admin 8
+```
+
+This command will brute-force all possible 8-character passwords for the user "admin" at the provided URL. The script will output the password when the server returns a "Success" message.
