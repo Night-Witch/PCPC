@@ -35,7 +35,11 @@ class Program
         using (HttpClient client = new HttpClient())
         {
             // Generate all possible combinations of characters for the password
-            string charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            string charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" + // English letters
+                 "äöüßÄÖÜ" + // German letters
+                 "0123456789" + // Digits
+                 "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~" + // Basic special characters
+                 "“”‘’•…—–"; // Other punctuation marks and symbols
             int charsetLength = charset.Length;
             char[] password = new char[passwordLength];
 
