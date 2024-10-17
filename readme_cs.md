@@ -45,17 +45,21 @@ Follow these steps to set up, compile, and run the C# brute force script on Kali
   Before running the C# script, you need to install the .NET SDK. Here’s how you can do it:
    
   **1.1 Update your package lists and install the required dependencies:**
+    
     ```
     sudo apt update
     ```
+    
     ```
     sudo apt install -y apt-transport-https software-properties-common
     ```
    
    **1.2. Add Microsoft’s package signing key and repository:**
+    
     ```
     wget https://packages.microsoft.com/config/debian/10/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
     ```
+    
     ```
     sudo dpkg -i packages-microsoft-prod.deb
     ```
@@ -69,20 +73,25 @@ Follow these steps to set up, compile, and run the C# brute force script on Kali
     ```
   
   **1.4. Verify the installation:**
+   
     `dotnet --version`
+  
     If installed correctly, it will display the version number (e.g., 7.0.100).
 
 **2. Set Up the Project**
   
    **2.1. Create a new directory for the project:**
+ 
    ```
-   mkdir BruteForcePassword
+   mkdir PCPC
    ```
+   
    ```
-   cd BruteForcePassword
+   cd PCPC
    ```
   
    **2.2. Create a new C# console application project:**
+  
    `dotnet new console`
    
    This command generates the basic structure for a console project with a Program.cs file.
@@ -127,7 +136,11 @@ class Program
     {
         using (HttpClient client = new HttpClient())
         {
-            string charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+           string charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" + // English letters
+                 "äöüßÄÖÜ" + // German letters
+                 "0123456789" + // Digits
+                 "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~" + // Basic special characters
+                 "“”‘’•…—–"; // Other punctuation marks and symbols
             int charsetLength = charset.Length;
             char[] password = new char[passwordLength];
 
@@ -230,49 +243,3 @@ In this example:
 4. Install Dependencies: Install the Newtonsoft.Json package for JSON handling.
 5. Run the Script: Use dotnet run with the URL, username, and password length as arguments.
 6. Now your C# script will execute, sending HTTP POST requests and brute-forcing the password based on the command-line inputs.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
-    
-
-
